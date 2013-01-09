@@ -87,7 +87,7 @@ module PermissionsHelper
   include AbilityList::Helpers
 
   def abilities
-    current_user.abilities
+    current_user.try :abilities
   end
 end
 ```

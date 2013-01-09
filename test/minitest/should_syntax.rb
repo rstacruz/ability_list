@@ -8,8 +8,8 @@ require 'minitest/unit'
 #     obj.should == 2
 #     obj.should ~= /regex/
 #     obj.should != 3
-#     obj.should.be.true!
-#     obj.should.be.false!
+#     obj.should.be.true    # Truthy
+#     obj.should.be.false   # Falsy
 #
 #   # Anything else will just pass thru:
 #     obj.should.nil?     # same as: assert obj.nil?
@@ -61,6 +61,16 @@ module MiniTest
     def positive?() !@neg; end
     def test()      @@test; end
     def not()       @neg = true; self; end
+
+    def true()    true_or_false(true); end
+    def false()   true_or_false(false); end
+
+    def true_or_false(bool)
+      val = !! left
+      val = !val  if bool == false
+      method = (positive? ? :"assert" : :"refute")
+      test.send method, val, [msg, 'Expected to be falsy'].compact.join("\n")
+    end
 
     def blaming(msg);   @msg = msg; self; end
     def messaging(msg); @msg = msg; self; end

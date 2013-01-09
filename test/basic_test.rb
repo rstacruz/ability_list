@@ -1,5 +1,4 @@
 require File.expand_path('../helper.rb', __FILE__)
-require File.expand_path('../minitest/should_syntax.rb', __FILE__)
 
 module BasicTest
   Video = Class.new(OpenStruct)

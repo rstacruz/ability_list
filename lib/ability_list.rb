@@ -74,7 +74,7 @@ module AbilityList::Helpers
   end
 
   def authorize!(*a)
-    raise AbilityList::Error.new("No 'ability' defined") unless ability
+    raise AbilityList::Error.new("No 'ability' defined") unless abilities
     abilities.authorize!(*a)
   end
 end
