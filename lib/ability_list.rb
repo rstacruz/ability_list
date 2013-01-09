@@ -32,7 +32,7 @@ class AbilityList
   end
 
   # Inverse of `can?`.
-  def cannot?(verb, object)
+  def cannot?(verb, object=nil)
     ! can?(verb, object)
   end
 
@@ -40,12 +40,12 @@ class AbilityList
 
   # Ensures that the owner can perform `verb` on `object/class` -- raises an
   # error otherwise.
-  def authorize!(verb, object)
+  def authorize!(verb, object=nil)
     can?(verb, object) or raise Error.new("Access denied (#{verb})")
   end
 
   # Inverse of `authorize!`.
-  def unauthorize!(verb, object)
+  def unauthorize!(verb, object=nil)
     cannot?(verb, object) or raise Error.new("Access denied (#{verb})")
   end
 
