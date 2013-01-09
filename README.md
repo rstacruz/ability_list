@@ -4,6 +4,12 @@ AbilityList
 Simple permissions system as plain old Ruby objects. No fancy integration with 
 ORMs or frameworks.
 
+All of this is just a single Ruby file with less than 50 lines of significant 
+code. [Read it now][ability_list.rb].
+
+Usage
+-----
+
 ### Defining abilities
 
 Define the list of abilities a user has.
@@ -115,7 +121,7 @@ can :edit, Comment { |c| c.created_at < 3.minutes.ago }
 Examples
 --------
 
-See RECIPES.md for more examples.
+See [RECIPES.md] for more examples.
 
 Limitations
 -----------
@@ -124,9 +130,12 @@ Limitations
 
  * No explicit provisions for roles.
  
-See RECIPES.md on how to do these things.
+See [RECIPES.md] on how to do these things.
 
 Acknowledgements
 ----------------
 
 Heavily inspired by [cancan](https://github.com/ryanb/cancan).
+
+[ability_list.rb]:https://github.com/rstacruz/ability_list/blob/master/lib/ability_list.rb
+[RECIPES.md]:https://github.com/rstacruz/ability_list/blob/master/RECIPES.md
