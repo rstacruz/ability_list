@@ -10,22 +10,20 @@ class AbilityList
   # ---
 
   # Declares that the owner can perform `verb` on `class`.
-  def can(verb, klass, &block)
-    rules << [true, verb, klass, block]
+  def can(verb, klass=nil, &block)
+    rules << [true, verb, get_class(klass), block]
   end
 
   # Inverse of `can`.
-  def cannot(verb, klass, &block)
-    rules << [false, verb, klass, block]
+  def cannot(verb, klass=nil, &block)
+    rules << [false, verb, get_class(klass), block]
   end
 
   # ---
 
   # Checks if the owner can perform `verb` on the given `object` (or class).
-  def can?(verb, object)
-    object_class = object.class == Class ? object : object.class
-
-    rules = rules_for(verb, object_class)
+  def can?(verb, object=nil)
+    rules = rules_for(verb, get_class(object))
     rules.inject(false) do |bool, (sign, _, _, proc)|
       sign ?
         (bool || !proc ||  proc.call(object)) :  # can
@@ -59,6 +57,12 @@ class AbilityList
       (_verb  == :manage || _verb  == verb) &&
       (_klass == :all    || _klass == klass)
     end
+  end
+
+private
+
+  def get_class(object)
+    [NilClass, Symbol, Class].include?(object.class) ? object : object.class
   end
 end
 
