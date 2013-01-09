@@ -11,7 +11,7 @@ code. [Read it now][ability_list.rb].
 
 Define the list of abilities a user has by subclassing `AbilityList`.
 
-Each ability is comprised of a **verb** (required) and an **object** (optional).  
+Each ability is comprised of a **verb** (required) and an **object** (optional).
 A *verb* is any symbol, while the *object* can be a symbol or a class.
 
 ``` ruby
