@@ -12,7 +12,7 @@ Define the list of abilities a user has.
 class MyAbilities < AbilityList
   def initialize(user)
     can    :view, Video
-    cannot :view, Video, &:restricted
+    cannot :upload, Video
   end
 end
 ```
@@ -58,6 +58,14 @@ You can pass a block to `can` for custom criteria:
 can :view, Video do |video|
   !video.restricted? or user.age > 18
 end
+```
+
+You can even use Ruby's `&:sym` syntax:
+
+``` ruby
+cannot :edit, Article, &:published?
+
+# Equivalent to cannot(:edit, Article) { |article| article.published? }
 ```
 
 ### Object types
