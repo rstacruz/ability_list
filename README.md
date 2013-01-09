@@ -32,10 +32,35 @@ user.can?(:view, Video)
 user.can?(:view, Video.find(20))
 ```
 
-Or you can use `authorize!`, which is exactly like `can?` except it htrows 
-exceptions:
+### Raising errors
+
+Or you can use `authorize!`, which is exactly like `can?` except it raises
+a `AbilityList::Error` exception. Perfect for controllers.
 
 ``` ruby
 user.authorize! :view, Video.find(20)
 ```
 
+### Custom criteria
+
+You can pass a block to `can` for custom criteria:
+
+``` ruby
+can :view, Video do |video|
+  !video.restricted? or user.age > 18
+end
+```
+
+Limitations
+-----------
+
+ * No integration with controllers.
+
+ * No explicit provisions for roles.
+ 
+See RECIPES.md on how to do these things.
+
+Acknowledgements
+----------------
+
+Heavily inspired by [cancan](https://github.com/ryanb/cancan).
