@@ -15,7 +15,11 @@ Define the list of abilities a user has.
 class MyAbilities < AbilityList
   def initialize(user)
     can    :view, Video
-    cannot :upload, Video
+
+    if user.admin?
+      can :delete, Video
+      can :upload, Video
+    end
   end
 end
 ```
@@ -44,7 +48,7 @@ user.can?(:view, Video.find(20))
 
 The inverse `cannot?` is also available.
 
-### Raising errors
+## Raising errors
 
 Or you can use `authorize!`, which is exactly like `can?` except it raises
 a `AbilityList::Error` exception. Perfect for controllers.
@@ -99,7 +103,11 @@ can :login, :mobile_site
 ## Overriding criteria
 
 Criteria are evaluated on a top-down basis, and the ones at the bottom will 
-override the ones on top. For example:
+override the ones on top.
+
+The method `cannot` is provided to make exceptions to rules.
+
+For example:
 
 ``` ruby
 # Everyone can edit comments.
