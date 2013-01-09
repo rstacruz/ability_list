@@ -28,7 +28,7 @@ Then hook it to user by defining an `ability` method.
 
 ``` ruby
 class User < OpenStruct
-  include AbilityList::Owner
+  include AbilityList::Helpers
 
   def ability
     @ability ||= MyAbilities.new(self)

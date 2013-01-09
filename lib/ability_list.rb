@@ -62,11 +62,19 @@ class AbilityList
   end
 end
 
-module AbilityList::Owner
-  def can?(*a)          ability.can?(*a); end
-  def cannot?(*a)       ability.cannot?(*a); end
-  def authorize!(*a)    ability.authorize!(*a); end
-  def unauthorize!(*a)  ability.unauthorize!(*a); end
+module AbilityList::Helpers
+  def can?(*a)
+    ability && ability.can?(*a)
+  end
+
+  def cannot?(*a)
+    !ability || ability.cannot?(*a)
+  end
+
+  def authorize!(*a)
+    raise AbilityList::Error.new("No 'ability' defined") unless ability
+    ability.authorize!(*a)
+  end
 end
 
 require 'ability_list/version'

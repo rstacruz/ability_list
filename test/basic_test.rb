@@ -7,9 +7,9 @@ module BasicTest
   # ---
 
   class User < OpenStruct
-    include AbilityList::Owner
+    include AbilityList::Helpers
 
-    def ability()
+    def ability
       @ability ||= Abilities.new(self)
     end
   end
