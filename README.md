@@ -14,7 +14,7 @@ Define the list of abilities a user has.
 ``` ruby
 class MyAbilities < AbilityList
   def initialize(user)
-    can    :view, Video
+    can :view, Video
 
     if user.admin?
       can :delete, Video
@@ -24,7 +24,7 @@ class MyAbilities < AbilityList
 end
 ```
 
-Then hook it to user.
+Then hook it to user by defining an `ability` method.
 
 ``` ruby
 class User < OpenStruct
