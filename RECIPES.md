@@ -75,3 +75,22 @@ class Abilities < AbilityList
   end
 end
 ```
+
+Defining Rails helpers
+----------------------
+
+``` ruby
+module PermissionsHelper
+  def can?(verb, object)
+    current_user && current_user.can?(verb, object)
+  end
+end
+```
+
+So that you may:
+
+``` erb
+<% if can?(:edit, @post) %>
+  <a href="#edit">Edit</a>
+<% end %>
+```
