@@ -62,18 +62,20 @@ class AbilityList
   end
 end
 
+# Provides `#can?` and `#cannot?` and other helpers.
+# Assumes that you have an `#ability` method defined.
 module AbilityList::Helpers
   def can?(*a)
-    ability && ability.can?(*a)
+    abilities && abilities.can?(*a)
   end
 
   def cannot?(*a)
-    !ability || ability.cannot?(*a)
+    !abilities || abilities.cannot?(*a)
   end
 
   def authorize!(*a)
     raise AbilityList::Error.new("No 'ability' defined") unless ability
-    ability.authorize!(*a)
+    abilities.authorize!(*a)
   end
 end
 

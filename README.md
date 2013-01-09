@@ -12,7 +12,7 @@ code. [Read it now][ability_list.rb].
 Define the list of abilities a user has.
 
 ``` ruby
-class MyAbilities < AbilityList
+class Abilities < AbilityList
   def initialize(user)
     can :view, Video
 
@@ -24,14 +24,14 @@ class MyAbilities < AbilityList
 end
 ```
 
-Then hook it to user by defining an `ability` method.
+Then hook it to user by defining an `abilities` method.
 
 ``` ruby
 class User < OpenStruct
   include AbilityList::Helpers
 
-  def ability
-    @ability ||= MyAbilities.new(self)
+  def abilities
+    @abilities ||= Abilities.new(self)
   end
 end
 ```
@@ -51,7 +51,7 @@ The inverse `cannot?` is also available.
 ## Raising errors
 
 Or you can use `authorize!`, which is exactly like `can?` except it raises
-a `AbilityList::Error` exception. Perfect for controllers.
+an `AbilityList::Error` exception. Perfect for controllers.
 
 ``` ruby
 user.authorize! :view, Video.find(20)

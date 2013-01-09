@@ -9,8 +9,8 @@ module BasicTest
   class User < OpenStruct
     include AbilityList::Helpers
 
-    def ability
-      @ability ||= Abilities.new(self)
+    def abilities
+      @abilities ||= Abilities.new(self)
     end
   end
 

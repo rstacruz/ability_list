@@ -79,10 +79,15 @@ end
 Defining Rails helpers
 ----------------------
 
+The `Helpers` module used in Users can be used as Rails helpers too.
+
 ``` ruby
 module PermissionsHelper
-  def can?(verb, object)
-    current_user && current_user.can?(verb, object)
+  # Provides `can?` and `cannot?`... as long as you have `#ability` defined.
+  include AbilityList::Helpers
+
+  def ability
+    current_user.ability
   end
 end
 ```
