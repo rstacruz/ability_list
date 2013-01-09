@@ -1,6 +1,9 @@
 How to implement roles
 ----------------------
 
+AbilityList has no explicit support for roles because they're pretty easy to do 
+in the plain ol' Ruby way.
+
 ``` ruby
 class Abilities < AbilityList
   def initialize(user)
@@ -33,6 +36,9 @@ end
 How to integrate with Rails controllers
 ---------------------------------------
 
+This Rails example raises an error when the logged in user is not allowed of a 
+certain permission.
+
 ``` ruby
 class ArticleController
   before_filter :authorize_viewing
@@ -47,6 +53,9 @@ end
 
 How to implement user levels
 ----------------------------
+
+If your `User` model has a numeric field `level`, where more permissions are 
+available to users with higher levels, you can implement it like so:
 
 ``` ruby
 class Abilities < AbilityList
