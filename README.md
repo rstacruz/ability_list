@@ -166,7 +166,12 @@ See [RECIPES.md] for some practical examples.
 Limitations
 -----------
 
- * No integration with controllers.
+AbilityList aims to be extremely lean, and to be as framework- and ORM-agnostic 
+as possible. As such, it doesn't:
+
+ * No explicit integration with Rails controllers.
+
+ * No explicit integration with ActiveRecord (or any other ORM).
 
  * No explicit provisions for roles.
  
