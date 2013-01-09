@@ -7,7 +7,7 @@ class AbilityList
     @rules ||= []
   end
 
-  # Checks if the owner can perform `verb` on the given `object/class`.
+  # Checks if the owner can perform `verb` on the given `object` (or class).
   def can?(verb, object)
     object_class = object.class == Class ? object : object.class
 
@@ -31,7 +31,7 @@ class AbilityList
   end
 
   # Inverse of `authorize!`.
-  def deny!(verb, object)
+  def unauthorize!(verb, object)
     cannot?(verb, object) or raise Error.new("Access denied (#{verb})")
   end
 
@@ -55,10 +55,10 @@ class AbilityList
 end
 
 module AbilityList::Owner
-  def can?(*a)       ability.can?(*a); end
-  def cannot?(*a)    ability.cannot?(*a); end
-  def authorize!(*a) ability.authorize!(*a); end
-  def deny!(*a)      ability.deny!(*a); end
+  def can?(*a)          ability.can?(*a); end
+  def cannot?(*a)       ability.cannot?(*a); end
+  def authorize!(*a)    ability.authorize!(*a); end
+  def unauthorize!(*a)  ability.unauthorize!(*a); end
 end
 
 require 'ability_list/version'
