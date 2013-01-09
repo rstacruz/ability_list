@@ -1,11 +1,25 @@
 class AbilityList
   Error = Class.new(StandardError)
 
-  # Returns a list of rules.
+  # Returns a list of rules. These are populated by `can` and `cannot`.
   # (Rules are tuples)
   def rules
     @rules ||= []
   end
+
+  # ---
+
+  # Declares that the owner can perform `verb` on `class`.
+  def can(verb, klass, &block)
+    rules << [true, verb, klass, block]
+  end
+
+  # Inverse of `can`.
+  def cannot(verb, klass, &block)
+    rules << [false, verb, klass, block]
+  end
+
+  # ---
 
   # Checks if the owner can perform `verb` on the given `object` (or class).
   def can?(verb, object)
@@ -24,6 +38,8 @@ class AbilityList
     ! can?(verb, object)
   end
 
+  # ---
+
   # Ensures that the owner can perform `verb` on `object/class` -- raises an
   # error otherwise.
   def authorize!(verb, object)
@@ -35,17 +51,9 @@ class AbilityList
     cannot?(verb, object) or raise Error.new("Access denied (#{verb})")
   end
 
-  # Declares that the owner can perform `verb` on `class`.
-  def can(verb, klass, &block)
-    rules << [true, verb, klass, block]
-  end
+  # ---
 
-  # Inverse of `can`.
-  def cannot(verb, klass, &block)
-    rules << [false, verb, klass, block]
-  end
-
-  # Returns ACL rules that matches given `verb` and `class`.
+  # Returns a subset of `rules` that match the given `verb` and `class`.
   def rules_for(verb, klass)
     rules.select do |(sign, _verb, _klass, block)|
       (_verb  == :manage || _verb  == verb) &&
