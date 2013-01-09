@@ -11,8 +11,8 @@ code. [Read it now][ability_list.rb].
 
 Define the list of abilities a user has by subclassing `AbilityList`.
 
-Each ability is comprised of a **verb** and an **object** (or class). A *verb* 
-is any symbol, while the *object* can be a symbol or a class.
+Each ability is comprised of a **verb** (required) and an **object** (optional).  
+A *verb* is any symbol, while the *object* can be a symbol or a class.
 
 ``` ruby
 class Abilities < AbilityList
@@ -24,7 +24,9 @@ class Abilities < AbilityList
       can :upload, Video
     end
 
-    can :login, :website
+    can :login
+
+    can :view, :admin
   end
 end
 ```
@@ -49,6 +51,9 @@ Now you may use `can?`:
 user = User.new
 user.can?(:view, Video)
 user.can?(:view, Video.find(20))
+
+user.can?(:login)
+user.can?(:view, :admin)
 ```
 
 The inverse `cannot?` is also available.
