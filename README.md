@@ -7,10 +7,7 @@ ORMs or frameworks.
 All of this is just a single Ruby file with less than 50 lines of significant 
 code. [Read it now][ability_list.rb].
 
-Usage
------
-
-### Defining abilities
+## Defining abilities
 
 Define the list of abilities a user has.
 
@@ -35,7 +32,7 @@ class User < OpenStruct
 end
 ```
 
-### Checking for abilities
+## Checking for abilities
 
 Now you may use `can?`:
 
@@ -56,7 +53,7 @@ a `AbilityList::Error` exception. Perfect for controllers.
 user.authorize! :view, Video.find(20)
 ```
 
-### Custom criteria
+## Custom criteria
 
 You can pass a block to `can` for custom criteria:
 
@@ -74,7 +71,7 @@ cannot :edit, Article, &:published?
 # Equivalent to cannot(:edit, Article) { |article| article.published? }
 ```
 
-### Object types
+## Object types
 
 The method `can` always accepts at least 2 arguments: a *verb* and an *object*.
 
@@ -99,7 +96,7 @@ can :login, :mobile_site
 # user.can?(:login, :mobile_site)
 ```
 
-### Overriding criteria
+## Overriding criteria
 
 Criteria are evaluated on a top-down basis, and the ones at the bottom will 
 override the ones on top. For example:
