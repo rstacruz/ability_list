@@ -9,7 +9,10 @@ code. [Read it now][ability_list.rb].
 
 ## Defining abilities
 
-Define the list of abilities a user has.
+Define the list of abilities a user has by subclassing `AbilityList`.
+
+Each ability is comprised of a **verb** and an **object** (or class). A *verb* 
+is any symbol, while the *object* can be a symbol or a class.
 
 ``` ruby
 class Abilities < AbilityList
@@ -20,6 +23,8 @@ class Abilities < AbilityList
       can :delete, Video
       can :upload, Video
     end
+
+    can :login, :website
   end
 end
 ```
