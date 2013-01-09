@@ -175,7 +175,11 @@ See [RECIPES.md] on how to do these things.
 Acknowledgements
 ----------------
 
-Heavily inspired by [cancan](https://github.com/ryanb/cancan).
+Heavily inspired by [cancan]. AbilityList is generally a stripped-down version 
+of cancan with a lot less features (see    Limitations) above.
 
+(c) 2013 MIT License.
+
+[cancan]: https://github.com/ryanb/cancan
+[RECIPES.md]: https://github.com/rstacruz/ability_list/blob/master/RECIPES.md
 [ability_list.rb]:https://github.com/rstacruz/ability_list/blob/master/lib/ability_list.rb
-[RECIPES.md]:https://github.com/rstacruz/ability_list/blob/master/RECIPES.md
