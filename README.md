@@ -123,10 +123,45 @@ end
 can :edit, Comment { |c| c.created_at < 3.minutes.ago }
 ```
 
-Examples
---------
+## The `:manage` keyword
 
-See [RECIPES.md] for more examples.
+You can use `:manage` as the verb to allow any verb.
+
+``` ruby
+can :manage, Group
+```
+
+This allows the user to do anything to `Group` its instances.
+
+``` ruby
+user.can?(:delete, Group)       #=> true
+user.can?(:create, Group)       #=> true
+user.can?(:eviscerate, Group)   #=> true
+```
+
+## The `:all` keyword
+
+You can use `:all` as the object for any permission. This allows a verb to work 
+on anything.
+
+Don't know why you'll want this, but cancan has it, so:
+
+``` ruby
+can :delete, :all
+```
+
+So you can:
+
+``` ruby
+user.can?(:delete, Video)     #=> true
+user.can?(:delete, Article)   #=> true
+user.can?(:delete, Recipe)    #=> true
+```
+
+More examples
+-------------
+
+See [RECIPES.md] for some practical examples.
 
 Limitations
 -----------
