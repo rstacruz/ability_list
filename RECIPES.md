@@ -83,11 +83,11 @@ The `Helpers` module used in Users can be used as Rails helpers too.
 
 ``` ruby
 module PermissionsHelper
-  # Provides `can?` and `cannot?`... as long as you have `#ability` defined.
+  # Provides `can?` and `cannot?`... as long as you have `#abilities` defined.
   include AbilityList::Helpers
 
-  def ability
-    current_user.ability
+  def abilities
+    current_user.abilities
   end
 end
 ```
