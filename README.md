@@ -1,6 +1,11 @@
 AbilityList
 ===========
 
+Simple permissions system as plain old Ruby objects. No fancy integration with 
+ORMs or frameworks.
+
+### Defining abilities
+
 Define the list of abilities a user has.
 
 ``` ruby
@@ -24,6 +29,8 @@ class User < OpenStruct
 end
 ```
 
+### Checking for abilities
+
 Now you may use `can?`:
 
 ``` ruby
@@ -31,6 +38,8 @@ user = User.new
 user.can?(:view, Video)
 user.can?(:view, Video.find(20))
 ```
+
+The inverse `cannot?` is also available.
 
 ### Raising errors
 
@@ -50,6 +59,55 @@ can :view, Video do |video|
   !video.restricted? or user.age > 18
 end
 ```
+
+### Object types
+
+The method `can` always accepts at least 2 arguments: a *verb* and an *object*.
+
+You can define your permissions by passing a class as the object:
+
+``` ruby
+can :view, Video
+```
+
+which makes it possible to check for instances or classes:
+
+``` ruby
+user.can?(:view, Video)                 #-> passing a class
+user.can?(:view, Video.find(1008))      #-> passing an instance
+```
+
+But this doesn't have to be classes. Just pass anything else, like a symbol:
+
+``` ruby
+can :login, :mobile_site
+
+# user.can?(:login, :mobile_site)
+```
+
+### Overriding criteria
+
+Criteria are evaluated on a top-down basis, and the ones at the bottom will 
+override the ones on top. For example:
+
+``` ruby
+# Everyone can edit comments.
+can :edit, Comment
+
+# ...but unconfirmed users can't edit their comments.
+if user.unconfirmed?
+  cannot :edit, Comment
+end
+
+# ...but if the comments are really new, they can be edited, even if the user
+# hasn't confirmed.
+can :edit, Comment { |c| c.created_at < 3.minutes.ago }
+```
+
+Examples
+--------
+
+See RECIPES.md for more examples.
 
 Limitations
 -----------
