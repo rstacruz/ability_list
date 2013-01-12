@@ -10,5 +10,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/rstacruz/ability_list"
   s.files = `git ls-files`.strip.split("\n")
 
-  s.add_development_dependency "minitest", "> 0"
+  s.add_development_dependency "minitest"
+  s.add_development_dependency "minitest-should_syntax"
+  s.add_development_dependency "rake"
 end
