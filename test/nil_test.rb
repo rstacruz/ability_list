@@ -24,13 +24,13 @@ module NilTest
     let(:user) { User.new }
 
     it "#can? 1" do
-      user.can?(:make, :fire).should.be.true
+      user.can?(:make, :fire).must_equal true
     end
     it "#can? 2" do
-      user.can?(:make).should.be.true
+      user.can?(:make).must_equal true
     end
     it "#can? 3" do
-      user.can?(:make, :lasagna).should.be.false
+      user.can?(:make, :lasagna).must_equal false
     end
   end
 end

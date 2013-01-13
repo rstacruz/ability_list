@@ -18,15 +18,15 @@ module HelpersTest
     let(:user) { User.new }
 
     it '#can? fail' do
-      user.can?(:cook, :spam).should.be.false
+      (!! user.can?(:cook, :spam)).must_equal false
     end
 
     it '#cannot? fail' do
-      user.cannot?(:cook, :spam).should.be.true
+      (!! user.cannot?(:cook, :spam)).must_equal true
     end
 
     it '#authorize! fail' do
-      should.raise AbilityList::Error do
+      assert_raises AbilityList::Error do
         user.authorize! :cook, :spam
       end
     end

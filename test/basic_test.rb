@@ -37,35 +37,35 @@ module BasicTest
       user  = User.new :age => 22
       video = Video.new :restricted => false
 
-      user.can?(:view, video).should == true
+      user.can?(:view, video).must_equal true
     end
 
     it "#can? 2" do
       user  = User.new :age => 10
       video = Video.new :restricted => true
 
-      user.can?(:view, video).should == false
+      user.can?(:view, video).must_equal false
     end
 
     it "#can? 3" do
       user  = User.new :age => 42
       video = Video.new :restricted => true
 
-      user.can?(:view, video).should == true
+      user.can?(:view, video).must_equal true
     end
 
     it "#cannot?" do
       user  = User.new :age => 10
       video = Video.new :restricted => true
 
-      user.cannot?(:view, video).should == true
+      user.cannot?(:view, video).must_equal true
     end
 
     it "#authorize!" do
       user  = User.new :age => 10
       video = Video.new :restricted => true
 
-      should.raise AbilityList::Error do
+      assert_raises AbilityList::Error do
         user.authorize! :view, video
       end
     end
